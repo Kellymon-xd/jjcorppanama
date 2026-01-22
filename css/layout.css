@@ -139,3 +139,36 @@ main {
     text-align: center;
   }
 }
+
+.footer-social {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+}
+
+.footer-social img {
+  width: 22px;
+  height: 22px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.footer-social a:hover img {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.social-icon .icon {
+  width: 22px;
+  height: 22px;
+  fill: var(--icon-color);
+  transition: fill 0.2s ease;
+}

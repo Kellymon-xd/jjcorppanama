@@ -51,3 +51,12 @@ li {
   padding-top: 90px; /* altura inicial del navbar */
   }
 }
+
+html:not(.app-ready) body {
+  opacity: 0;
+}
+
+html.app-ready body {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}

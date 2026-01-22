@@ -1,69 +1,58 @@
+(() => {
+  const carousel = document.querySelector(".hero-carousel");
+  if (!carousel) return;
+
+  const track = carousel.querySelector(".hero-track");
+  const slides = carousel.querySelectorAll("img");
+  const prev = carousel.querySelector(".prev");
+  const next = carousel.querySelector(".next");
+
+  let index = 0;
+  const total = slides.length;
+
+  function go(i) {
+    index = (i + total) % total;
+    track.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  prev.addEventListener("click", () => go(index - 1));
+  next.addEventListener("click", () => go(index + 1));
+
+  // autoplay
+  setInterval(() => go(index + 1), 5000);
+})();
+
+
+/* =========================
+   THEME
+========================= */
+
 function syncThemeUI() {
-  const html = document.documentElement;
   const toggle = document.getElementById("themeToggle");
   if (!toggle) return;
-
-  toggle.textContent = html.classList.contains("dark") ? "☀️" : "🌙";
-}
-
-// restaurar tema
-const savedTheme = localStorage.getItem("theme");
-if (savedTheme === "dark") {
-  document.documentElement.classList.add("dark");
+  toggle.textContent =
+    document.documentElement.classList.contains("dark") ? "☀️" : "🌙";
 }
 
 function applyTheme(theme) {
   const html = document.documentElement;
-
-  if (theme === "dark") {
-    html.classList.add("dark");
-  } else {
-    html.classList.remove("dark");
-  }
-
+  html.classList.toggle("dark", theme === "dark");
   localStorage.setItem("theme", theme);
   syncThemeUI();
 }
 
 /* =========================
-   NAVBAR + DROPDOWN (MOBILE FIX)
+   NAVBAR
 ========================= */
 
-/* ===== NOSOTROS: MOBILE → ABRE / LUEGO NAVEGA ===== */
-document.addEventListener("pointerdown", (e) => {
-  const link = e.target.closest(".dropdown-toggle");
-  if (!link) return;
-  if (window.innerWidth > 768) return;
-
-  const parent = link.closest(".has-dropdown");
-  const navLinks = document.querySelector(".nav-links");
-
-  // Primer tap → abre y marca
-  if (!parent.classList.contains("open")) {
-    e.preventDefault();
-    parent.classList.add("open");
-    link.dataset.opened = "true"; // 👈 flag
-    return;
-  }
-});
-
-/* ===== CLICK GENERAL ===== */
 document.addEventListener("click", (e) => {
-  syncThemeUI();
-
-
   /* ===== DARK MODE ===== */
   if (e.target.id === "themeToggle") {
-    const html = document.documentElement;
-
-    html.classList.toggle("dark");
-
-    localStorage.setItem(
-      "theme",
-      html.classList.contains("dark") ? "dark" : "light"
+    applyTheme(
+      document.documentElement.classList.contains("dark")
+        ? "light"
+        : "dark"
     );
-
-    syncThemeUI();
     return;
   }
 
@@ -73,36 +62,67 @@ document.addEventListener("click", (e) => {
     return;
   }
 
-  /* HAMBURGER */
-  if (e.target.closest(".nav-toggle")) {
-    document.querySelector(".nav-links")?.classList.toggle("open");
+  /* ===== DROPDOWN MOBILE ===== */
+  const dropdownLink = e.target.closest(".dropdown-toggle");
+  if (dropdownLink && window.innerWidth <= 768) {
+    e.preventDefault();
+    dropdownLink.closest(".has-dropdown")?.classList.toggle("open");
     return;
   }
 
-  const link = e.target.closest(".dropdown-toggle");
-
-  /* BLOQUEAR NAVEGACIÓN EN PRIMER TAP */
-  if (link && window.innerWidth <= 768 && link.dataset.opened === "true") {
-    e.preventDefault();              // ⛔ bloquea navegación
-    delete link.dataset.opened;      // limpia flag
-    return;
-  }
-
-  /* CERRAR MENÚ AL NAVEGAR */
+  /* ===== CERRAR MENÚ AL NAVEGAR ===== */
   if (e.target.closest(".nav-links a")) {
     document.querySelector(".nav-links")?.classList.remove("open");
   }
 });
 
-/* =========================
-   NAVBAR SCROLL
-========================= */
+/* ===== NAVBAR SCROLL ===== */
 window.addEventListener("scroll", () => {
-  const navbar = document.querySelector(".navbar");
-  if (!navbar) return;
-
-  navbar.classList.toggle("scrolled", window.scrollY > 60);
+  document
+    .querySelector(".navbar")
+    ?.classList.toggle("scrolled", window.scrollY > 60);
 });
+
+/* =========================
+   IMAGE MODAL (GENÉRICO)
+========================= */
+
+function enableImageModal(selector) {
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("modalImage");
+
+  document.querySelectorAll(selector).forEach((img) => {
+    img.style.cursor = "zoom-in";
+    img.addEventListener("click", () => {
+      modalImg.src = img.src;
+      modal.style.display = "flex";
+    });
+  });
+}
+
+// cerrar modal
+document.querySelector(".modal-close")?.addEventListener("click", () => {
+  document.getElementById("imageModal").style.display = "none";
+});
+
+document.getElementById("imageModal")?.addEventListener("click", (e) => {
+  if (e.target.id === "imageModal") {
+    e.currentTarget.style.display = "none";
+  }
+});
+
+/* =========================
+   ACTIVAR MODAL EN IMÁGENES
+========================= */
+
+// servicios
+enableImageModal(".service-images img");
+
+// equipos
+enableImageModal(".equipment-grid img");
+
+enableImageModal(".hero-carousel img");
+
 
 /* =========================
    PROJECTS CAROUSEL
@@ -133,40 +153,3 @@ document.querySelectorAll(".project-card").forEach(card => {
     track.style.transform = `translateX(-${index * 100}%)`;
   };
 });
-
-/* =========================
-   IMAGE MODAL
-========================= */
-document.querySelector(".modal-close").onclick = () =>
-  document.getElementById("imageModal").style.display = "none";
-
-document.getElementById("imageModal").onclick = e => {
-  if (e.target.id === "imageModal") {
-    e.currentTarget.style.display = "none";
-  }
-};
-
-
-/* =========================
-   EQUIPMENT IMAGE MODAL
-========================= */
-document.querySelectorAll(".equipment-grid img").forEach(img => {
-  img.addEventListener("click", () => {
-    const modal = document.getElementById("imageModal");
-    const modalImg = document.getElementById("modalImage");
-
-    modalImg.src = img.src;
-    modal.style.display = "flex";
-  });
-});
-
-/* cerrar modal */
-document.querySelector(".modal-close").onclick = () => {
-  document.getElementById("imageModal").style.display = "none";
-};
-
-document.getElementById("imageModal").onclick = e => {
-  if (e.target.id === "imageModal") {
-    e.currentTarget.style.display = "none";
-  }
-};

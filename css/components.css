@@ -27,6 +27,10 @@
   min-height: auto;
 }
 
+.cover a, .cover--hero a, .cover--callout a {
+  color: white;
+}
+
 .cover-content {
   max-width: 700px;
 }
@@ -62,7 +66,6 @@
 #main-page-nosotros {
   background: linear-gradient(135deg,
       rgba(0, 50, 0, 0),
-      /* Verde oscuro con 80% opacidad */
       rgba(10, 10, 10, 1.0)
       /* Negro carbón con 90% opacidad */
     ),
@@ -443,6 +446,10 @@ textarea:focus {
   padding: 2rem;
 }
  
+/* =========================
+   SERVICE IMAGES (DESKTOP)
+========================= */
+
 .service-images {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -451,9 +458,8 @@ textarea:focus {
 
 .service-images img {
   width: 100%;
-  height: 100%;
+  aspect-ratio: 4 / 3;   /* 👈 mantiene tamaño bonito */
   object-fit: cover;
-  display: flex;
 }
 
 .service-card .service-content {
@@ -469,13 +475,35 @@ textarea:focus {
   padding-left: 1.2rem;
 }
 
-
-
+/* =========================
+   MOBILE: RESPONSIVE REAL
+========================= */
 @media (max-width: 768px) {
+
+  .service-images {
+    display: flex;
+    overflow-x: auto;
+    gap: 8px;
+    padding-bottom: 0.75rem;
+
+    width: 100%;                 /* 👈 siempre ancho del padre */
+    aspect-ratio: 16 / 9;
+    scroll-snap-type: x mandatory;
+  }
+
+  .service-images img {
+    flex: 0 0 100%;              /* 👈 ocupa todo el ancho */
+    height: 100%;                /* 👈 llena la altura calculada */
+    object-fit: cover;
+    scroll-snap-align: center;
+  }
+
   .service-card .service-content {
     padding: 1.5rem;
   }
 }
+
+
 
 
 /* =========================
@@ -531,36 +559,59 @@ textarea:focus {
   }
 }
 
+/* =========================
+   HERO CAROUSEL (FOOTER)
+========================= */
 
-.footer-social {
+.hero-carousel {
+  position: relative;
+  width: 100%;
+  height: 40rem;
+  overflow: hidden;
+  background: var(--bg-section);
+}
+
+.hero-track {
   display: flex;
-  gap: 1rem;
-  align-items: center;
+  height: 100%;
+  transition: transform 0.6s ease;
 }
 
-.footer-social a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
+.hero-track img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
-.footer-social img {
-  width: 22px;
-  height: 22px;
-  opacity: 0.8;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+/* botones */
+.hero-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.55);
+  color: white;
+  border: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 2;
 }
 
-.footer-social a:hover img {
-  opacity: 1;
-  transform: scale(1.1);
-}
+.hero-btn.prev { left: 20px; }
+.hero-btn.next { right: 20px; }
 
-.social-icon .icon {
-  width: 22px;
-  height: 22px;
-  fill: var(--icon-color);
-  transition: fill 0.2s ease;
+/* mobile */
+@media (max-width: 768px) {
+  .hero-carousel {
+    height: 260px;
+  }
+
+  .hero-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.6rem;
+  }
 }
