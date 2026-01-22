@@ -269,3 +269,31 @@
 .navbar.scrolled .navbar-logo img {
   height: 50px;
 }
+
+.dropdown-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 1.5rem; 
+}
+
+.dropdown-arrow {
+  background: none;
+  border: none;
+  font-size: 1.7rem;     /* más grande */
+  cursor: pointer;
+  padding: 10px 12px;   /* área táctil cómoda */
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+
+.has-dropdown.open .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+/* Flecha solo en mobile */
+@media (min-width: 769px) {
+  .dropdown-arrow {
+    display: none;
+  }
+}

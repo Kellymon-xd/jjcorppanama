@@ -63,10 +63,10 @@ document.addEventListener("click", (e) => {
   }
 
   /* ===== DROPDOWN MOBILE ===== */
-  const dropdownLink = e.target.closest(".dropdown-toggle");
-  if (dropdownLink && window.innerWidth <= 768) {
+  const arrow = e.target.closest(".dropdown-arrow");
+  if (arrow && window.innerWidth <= 768) {
     e.preventDefault();
-    dropdownLink.closest(".has-dropdown")?.classList.toggle("open");
+    arrow.closest(".has-dropdown")?.classList.toggle("open");
     return;
   }
 
