@@ -153,3 +153,11 @@ document.querySelectorAll(".project-card").forEach(card => {
     track.style.transform = `translateX(-${index * 100}%)`;
   };
 });
+
+window.addEventListener("load", () => {
+  const track = document.querySelector(".hero-track");
+  if (!track) return;
+
+  track.style.display = "flex";
+  track.style.flexWrap = "nowrap";
+});
