@@ -121,7 +121,6 @@ enableImageModal(".service-images img");
 // equipos
 enableImageModal(".equipment-grid img");
 
-
 /* =========================
    PROJECTS CAROUSEL
 ========================= */
@@ -129,6 +128,12 @@ document.querySelectorAll(".project-card").forEach(card => {
   const track = card.querySelector(".project-track");
   const images = card.dataset.images.split(",");
   let index = 0;
+  const total = images.length;
+
+  function go(i) {
+    index = (i + total) % total;
+    track.style.transform = `translateX(-${index * 100}%)`;
+  }
 
   images.forEach(src => {
     const img = document.createElement("img");
@@ -141,15 +146,13 @@ document.querySelectorAll(".project-card").forEach(card => {
     };
   });
 
-  card.querySelector(".next").onclick = () => {
-    index = (index + 1) % images.length;
-    track.style.transform = `translateX(-${index * 100}%)`;
-  };
+  card.querySelector(".next").onclick = () => go(index + 1);
+  card.querySelector(".prev").onclick = () => go(index - 1);
 
-  card.querySelector(".prev").onclick = () => {
-    index = (index - 1 + images.length) % images.length;
-    track.style.transform = `translateX(-${index * 100}%)`;
-  };
+  // autoplay (cada 4s, puedes ajustar)
+  setInterval(() => {
+    go(index + 1);
+  }, 4000);
 });
 
 window.addEventListener("load", () => {
