@@ -21,6 +21,7 @@
 
   --accent: var(--green-primary);
   --accent-hover: var(--green-dark);
+  --navbar-transparencia: #e5e7eb91;
 }
 
 /* DARK MODE */
@@ -35,6 +36,7 @@ html.dark {
 
   --accent: var(--green-light);
   --accent-hover: var(--green-primary);
+  --navbar-transparencia: #0f172a93;
 }
 
 :root {
