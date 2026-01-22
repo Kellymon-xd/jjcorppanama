@@ -1,0 +1,53 @@
+/* RESET BÁSICO */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+  line-height: 1.6;
+  background: var(--bg-main);
+  color: var(--text-main);
+  padding-top: 140px; /* altura inicial del navbar */
+}
+
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+/* LISTAS BASE */
+ul,
+ol {
+  padding-left: 1.5rem; /* recupera el espacio */
+  margin: 1rem 0;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  body{
+  padding-top: 90px; /* altura inicial del navbar */
+  }
+}

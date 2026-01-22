@@ -1,0 +1,46 @@
+/* PALETA BASE */
+:root {
+  --green-primary: #2e7d32;
+  --green-light: #66bb6a;
+  --green-dark: #1b5e20;
+
+  --black-carbon: #0f172a;
+  --gray-dark: #1f2933;
+  --gray-medium: #6b7280;
+  --gray-light: #e5e7eb;
+  --white: #ffffff;
+
+  /* LIGHT MODE */
+  --bg-main: var(--white);
+  --bg-section: #f9fafb;
+
+  --text-main: var(--gray-dark);
+  --text-muted: var(--gray-medium);
+
+  --border-color: var(--gray-light);
+
+  --accent: var(--green-primary);
+  --accent-hover: var(--green-dark);
+}
+
+/* DARK MODE */
+html.dark {
+  --bg-main: var(--black-carbon);
+  --bg-section: #020617;
+
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+
+  --border-color: #334155;
+
+  --accent: var(--green-light);
+  --accent-hover: var(--green-primary);
+}
+
+:root {
+  --icon-color: #1a1a1a; /* light */
+}
+
+.dark {
+  --icon-color: #ffffff; /* dark */
+}

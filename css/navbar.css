@@ -1,0 +1,268 @@
+/* =========================
+   NAVBAR (FIXED HEIGHT + LOGO)
+========================= */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: var(--bg-main);
+  border-bottom: 1px solid var(--border-color);
+  transition: box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.navbar-inner {
+  max-width: 1200px;
+  margin: auto;
+  padding: 1.25rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* LOGO */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo img {
+  height: 100px;
+  width: auto;
+  object-fit: contain;
+  transition: height 0.25s ease; /* necesario para el scroll */
+}
+
+/* LINKS */
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.nav-links a {
+  color: var(--text-main);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.25rem 0;
+  position: relative;
+}
+
+/* underline */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.25s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* =========================
+   DROPDOWN
+========================= */
+
+.has-dropdown {
+  position: relative;
+}
+
+/* ❌ YA NO SIRVE CON NAVBAR FIXED */
+/*
+.has-dropdown::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 12px;
+}
+*/
+
+/* dropdown */
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--bg-main);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  min-width: 240px;
+  padding: 0.5rem 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+
+/* hover continuo */
+.has-dropdown:hover .dropdown {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.dropdown li {
+  list-style: none;
+}
+
+.dropdown a {
+  display: block;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9rem;
+}
+
+.dropdown a:hover {
+  background: var(--bg-section);
+}
+
+.dropdown::before {
+  content: "";
+  position: absolute;
+  top: -10px;          /* altura del puente */
+  left: 0;
+  right: 0;
+  height: 10px;
+}
+
+
+/* =========================
+   DARK MODE BUTTON
+========================= */
+
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: var(--text-main);
+}
+
+.theme-toggle:hover {
+  background: var(--bg-section);
+}
+
+/* =========================
+   MOBILE NAV
+========================= */
+
+.nav-toggle {
+  display: none;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-main);
+}
+
+/* =========================
+   MOBILE NAVBAR
+========================= */
+
+@media (max-width: 768px) {
+
+  .navbar-inner {
+    position: relative;
+    justify-content: center;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .navbar-logo {
+    margin: 0 auto;
+  }
+
+  .navbar-logo img {
+    height: 52px;
+  }
+
+  .nav-toggle {
+    display: block;
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.6rem;
+    z-index: 2;
+  }
+
+  .theme-toggle {
+    position: absolute;
+    left: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 83%;
+    left: 0;
+    right: 0;
+    background: var(--bg-main);
+    flex-direction: column;
+    gap: 0;
+    border-bottom: 1px solid var(--border-color);
+    display: none;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links li {
+    width: 100%;
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 1rem 2rem;
+    width: 100%;
+  }
+
+  .nav-links a::after {
+    display: none;
+  }
+
+  /* mobile dropdown */
+  .dropdown {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    opacity: 1;
+    pointer-events: auto;
+    display: none;
+    background: var(--bg-section);
+  }
+
+  .has-dropdown.open .dropdown {
+    display: block;
+  }
+}
+
+/* =========================
+   NAVBAR SCROLLED
+========================= */
+
+.navbar.scrolled {
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+}
+
+.navbar.scrolled .navbar-inner {
+  padding: 0.75rem 1.5rem;
+}
+
+.navbar.scrolled .navbar-logo img {
+  height: 50px;
+}
