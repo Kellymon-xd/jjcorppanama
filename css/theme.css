@@ -21,7 +21,7 @@
 
   --accent: var(--green-primary);
   --accent-hover: var(--green-dark);
-  --navbar-transparencia: #e5e7eb91;
+  --navbar-transparencia: rgba(229,231,235,0.75);
 }
 
 /* DARK MODE */
@@ -36,7 +36,7 @@ html.dark {
 
   --accent: var(--green-light);
   --accent-hover: var(--green-primary);
-  --navbar-transparencia: #0f172a93;
+  --navbar-transparencia: rgba(15,23,42,0.75);
 }
 
 :root {
