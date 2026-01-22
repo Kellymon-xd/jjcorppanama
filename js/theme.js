@@ -121,8 +121,6 @@ enableImageModal(".service-images img");
 // equipos
 enableImageModal(".equipment-grid img");
 
-enableImageModal(".hero-carousel img");
-
 
 /* =========================
    PROJECTS CAROUSEL
