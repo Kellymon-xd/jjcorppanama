@@ -615,3 +615,24 @@ textarea:focus {
     font-size: 1.6rem;
   }
 }
+
+.mvv {
+  padding: 4rem 2rem; /* una sola vez */
+}
+
+.mvv-item {
+  margin-bottom: 3rem;
+}
+
+.mvv-item:last-child {
+  margin-bottom: 0;
+}
+
+.mvv p {
+  margin-bottom: 0.75rem;
+  line-height: 1.7;
+}
+
+.mvv h2 {
+  letter-spacing: 0.5px;
+}
