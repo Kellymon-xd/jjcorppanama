@@ -287,6 +287,14 @@
   transition: transform 0.3s ease;
 }
 
+.dropdown-arrow {
+  color: var(--color-main);          /* fuerza el color del botón */
+}
+
+.dropdown-arrow .arrow-icon {
+  color: inherit;      /* hereda del botón */
+}
+
 .has-dropdown.open .dropdown-arrow {
   transform: rotate(180deg);
 }
