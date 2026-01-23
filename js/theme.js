@@ -137,7 +137,7 @@ document.querySelectorAll(".project-card").forEach(card => {
 
   images.forEach(src => {
     const img = document.createElement("img");
-    img.src = "img/proyectos/" + src;
+    img.src = "/img/proyectos/" + src;
     track.appendChild(img);
 
     img.onclick = () => {

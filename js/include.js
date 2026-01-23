@@ -1,7 +1,7 @@
 (async function () {
   await Promise.all([
-    loadPartial("site-header", "partials/navbar.html"),
-    loadPartial("site-footer", "partials/footer.html"),
+    loadPartial("site-header", "/partials/navbar.html"),
+    loadPartial("site-footer", "/partials/footer.html"),
   ]);
 
   // espera a que el navegador termine layout + estilos
