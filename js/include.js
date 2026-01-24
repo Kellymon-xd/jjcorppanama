@@ -26,3 +26,9 @@ async function loadPartial(id, file) {
     document.documentElement.classList.toggle("dark", saved === "dark");
   }
 })();
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/sw.js")
+    .then(() => console.log("Service Worker registrado"))
+    .catch(err => console.log("Error en SW", err));
+}
