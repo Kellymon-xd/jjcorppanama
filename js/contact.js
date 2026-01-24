@@ -3,8 +3,9 @@
   if (!form) return;
 
   const status = document.getElementById("form-status");
+  const ENDPOINT = "https://formspree.io/f/xdaebgjv";
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     status.textContent = "";
@@ -17,27 +18,35 @@
       message: form.message.value.trim()
     };
 
-    // Validación básica
     if (!data.name || !data.email || !data.subject || !data.message) {
-      showError("Por favor complete todos los campos.");
-      return;
+      return showError("Por favor complete todos los campos.");
     }
 
     if (!isValidEmail(data.email)) {
-      showError("Correo electrónico no válido.");
-      return;
+      return showError("Correo electrónico no válido.");
     }
 
-    // Simulación de envío (placeholder)
     setLoading(true);
 
-    //ESTO SE CAMBIA CUANDO SE IMPLEMENTE LA API DE ENVIO
-    //fetch("/api/contact", { ... })
-    setTimeout(() => {
-      setLoading(false);
-      showSuccess("Mensaje enviado correctamente.");
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (!res.ok) throw new Error();
+
+      showSuccess("Mensaje enviado correctamente. Gracias por contactarnos.");
       form.reset();
-    }, 1200);
+    } catch {
+      showError("No se pudo enviar el mensaje. Intente más tarde.");
+    } finally {
+      setLoading(false);
+    }
   });
 
   function isValidEmail(email) {
