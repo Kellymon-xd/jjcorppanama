@@ -71,12 +71,14 @@
         </div>
 
         <!-- FORMULARIO -->
-        <form class="card">
-          <input type="text" placeholder="Nombre" required>
-          <input type="email" placeholder="Correo" required>
-          <input type="text" placeholder="Asunto" required>
-          <textarea placeholder="Mensaje" rows="5"></textarea>
-          <button class="btn-primary">Enviar</button>
+        <form id="contact-form" class="card">
+          <input type="text" name="name" placeholder="Nombre" required>
+          <input type="email" name="email" placeholder="Correo" required>
+          <input type="text" name="subject" placeholder="Asunto" required>
+          <textarea name="message" placeholder="Mensaje" rows="5" required></textarea>
+          <button type="submit" class="btn-primary">Enviar</button>
+
+          <p id="form-status" class="form-status" aria-live="polite"></p>
         </form>
       </div>
     </section>
@@ -86,6 +88,7 @@
 
   <script src="js/include.js"></script>
   <script src="js/theme.js"></script>
+  <script src="js/contact.js"></script>
 </body>
 
 </html>
