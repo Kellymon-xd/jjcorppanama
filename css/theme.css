@@ -22,6 +22,8 @@
   --accent: var(--green-primary);
   --accent-hover: var(--green-dark);
   --navbar-transparencia: rgba(229,231,235,0.75);
+  --nav-offset: 140px;
+  --icon-color: #1a1a1a; /* light */
 }
 
 /* DARK MODE */
@@ -37,12 +39,5 @@ html.dark {
   --accent: var(--green-light);
   --accent-hover: var(--green-primary);
   --navbar-transparencia: rgba(15,23,42,0.75);
-}
-
-:root {
-  --icon-color: #1a1a1a; /* light */
-}
-
-.dark {
   --icon-color: #ffffff; /* dark */
 }

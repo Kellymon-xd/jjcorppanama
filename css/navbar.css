@@ -292,3 +292,13 @@
     display: none;
   }
 }
+
+@media (max-width: 768px) {
+  :root {
+    --nav-offset: 90px;
+  }
+}
+
+[id] {
+  scroll-margin-top: var(--nav-offset);
+}
